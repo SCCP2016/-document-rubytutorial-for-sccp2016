@@ -1,4 +1,4 @@
-My Awesome Book
-=======
-
-This file file serves as your book's preface, a great place to describe your book's content and ideas.
+# 課外プロジェクト 2015 実践的プログラミング
+## ~ Ruby I ~
+2015 10/29 渡部未来・齊藤智博
+資料URL: https://github.com/tspider0176/RubyTutorial-for-SCCP
