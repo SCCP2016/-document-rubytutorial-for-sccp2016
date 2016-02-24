@@ -14,7 +14,7 @@
 * [第4章](chapter4/README.md)
   * [ハッシュの生成とメソッド](chapter4/chapter4_1.md)
 * [第5章](chapter5/README.md)
-	* [定義](chapter5/chapter5_1.md)
+	* [関数の定義](chapter5/chapter5_1.md)
 	* [デフォルト引数](chapter5/chapter5_2.md)
 * [第6章](chapter6/README.md)
 	* [オブジェクトとクラス定義](chapter6/chapter6_1.md)
