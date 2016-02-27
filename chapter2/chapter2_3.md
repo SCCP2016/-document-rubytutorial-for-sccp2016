@@ -10,3 +10,14 @@ end
 # if式などと同様にwhile修飾子が存在している。
 [被制御部] while [条件式]
 ```
+
+whileもRubyでは式なので値を返す。基本的にwhileの返却値はnilだが、値つきでbreakした時のみnil以外の値を返すようになっている。
+
+```ruby
+
+x = 0
+message = while true
+  x += 1
+  break 'x > 10' if x > 10
+puts message  #=> x > 10
+```
