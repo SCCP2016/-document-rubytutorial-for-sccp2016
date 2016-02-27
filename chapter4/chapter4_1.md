@@ -2,17 +2,17 @@
 
 以下にハッシュの構築方法と、アクセス方法を示す。
 
-```
+```ruby
 hash = {one: 1, two: 2, three: 3}
 p hash[:one] #=> 1
 p hash[:two] #=> 2
-hash[:five] = 5 # 新しいキーとバリューの組み合わせ。
-p hash       #=> {:one=>1, :two=>2, :three=>3, five=>5}
+hash[:five] = 5 # 新しいキーと値の組み合わせ。
+p hash       #=> {:one=>1, :two=>2, :three=>3, :five=>5}
 ```
 
 上のハッシュをREPL上で宣言して、実際に以下のコマンドを打ってハッシュの挙動を確かめてみよう。
 
-```
+```ruby
 # キーを指定して、値を参照する
 p humane_studies["Philosophy"]  # => "Aoki"
 # 存在しないキーの場合
@@ -29,7 +29,7 @@ book_to_author["Written expression"] = "Sawa"
 
 ハッシュにも配列同様にイテレータをサポートしているメソッドを持っている。
 
-```
+```ruby
 hash = {Mike: 18,  John: 19,  Jakky: 28,  Mika: 20,  Karen: 22,  Mary: 19,  Chris: 28,  Mikky: 25 }
 hash.each do |name, age|
   puts "#{name}: #{age}" if name[0] == "M" || name[0] == "C" # 頭文字がMとCの人だけ表示する。
