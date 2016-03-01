@@ -20,9 +20,9 @@ end
 
 if式の構造を覚えたら、以下の例を試してみよう。
 
-if.rb
 ```ruby
 # -*- coding: utf-8 -*-
+# if.rb
 
 x = 10
 if x == 1 then
@@ -61,9 +61,8 @@ end
 Rubyではifは文ではなく、式として評価することができる。
 文との違いを示すためにC言語との比較を以下に示す。
 
-if_exp.c
 ```c
-# -*- coding: utf-8 -*-
+// if_exp.c
 
 int x, y; // 宣言が必要。
 scanf("%d", &x);
@@ -75,8 +74,9 @@ if(x % 2 == 0){
 printf("%d\n", y);
 ```
 
-if_exp.rb
 ```ruby
+# if_exp.rb
+
 x = STDIN.gets.to_i # 標準入力を受け取り、整数に変換する。
 y = if x % 2 == 0 then  # ifの結果をyに代入
     x * 2   # 式(右辺)のみを記述

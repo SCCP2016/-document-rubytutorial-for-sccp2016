@@ -19,9 +19,9 @@ end
 Rubyのcase式は整数・文字、だけでなく任意の型を記述することができる。
 非常に面白い例として範囲をあらわすRange型を使用してみる。
 
-case.c
-```ruby
-# -*- coding: utf-8 -*-
+```c
+// -*- coding: utf-8 -*-
+// case.c
 
 int x;
 while(1){
@@ -39,9 +39,9 @@ while(1){
 }
 ```
 
-case.rb
 ```ruby
 # -*- coding: utf-8 -*-
+# case.rb
 
 puts '0~10の間の数字を入力してください。(範囲の外に出たら終了。)'
 loop{ # 無限ループをするメソッド
