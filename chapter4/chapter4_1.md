@@ -1,27 +1,58 @@
-## 4.1 文字列リテラル
+## 4.1 例外の捕捉
 
-文字列リテラルとは文字列の値そのもののことで、以下のようなシングルクォーテーションやダブルクォーテーションで囲まれたもののことである。
-
-```ruby
-"Ruby"
-'Ruby'
-```
-
-C言語ではシングルクォーテーションは文字にのみ使っていたので違和感があるかもしれないが、Rubyではどちらも文字列リテラルを生成するための表現である。しかし、この二つの表現方法には違いがある。下の例を見てみよう。
-
-```
-irb(main):001:0> message = "Ruby"
-=> "Ruby"
-irb(main):002:0> "#{message} is a powerful language."
-=> "Ruby is a powerful language."
-irb(main):003:0> '#{message} is a powerful language.'
-=> "\#{message} is a powerful language."
-```
-
-この例から分かるように、ダブルクォーテーションを使った文字列リテラルは変数の埋め込み(Strings interpolation)ができるのに対して、シングルクォーテーションを使っている方はプログラマ書いた文字列をそのまま表示している。これは、シングルクォーテーションで囲った文字列リテラルは*文字列をエスケープせずにそのままの値を持つ*という特徴からくる違いである。このため、途中で改行しようとして次のようなコードを書いても思った通りに動作しない。
+プログラムの実行中に処理が続行不可能になる異常な状態になる場合がある。そのような状態に陥った時に処理を断ち切って状況に合わせてその時用の処理をさせたい場合がある。例外処理はその時に必要となる。
 
 ```ruby
-puts 'a\nb' #=> a\nb
+begin
+  # 例外が発生しうる処理
+rescue
+  # 例外が発生した場合の処理
+else
+  # 例外が発生しなかった場合の処理
+ensure
+  # 例外が発生したかどうかに関わらず実行される処理
+end
 ```
 
-文字列リテラルを使用したコードを書く際には注意しよう。
+例えば、テキストファイルの内容をそのまま別のファイルにコピーする時に、読み込むファイルのあるディレクトリが無ければ処理は続行できず、エラーを発生させてしまう。以下の例は例外処理を利用してエラーを回避したコードである。
+
+```ruby
+begin
+  # ファイルをオープン
+  input_file = open('text/input.txt', 'w+')
+  output_file = open('text/output.txt', 'w')
+rescue
+  # ファイルオープンに失敗したらディレクトリを作成
+  Dir::mkdir('text')
+else
+  # ファイルオープンに成功したらコピーしてファイルクローズ
+  output_file.write("==Copy start==\n")
+  output_file.write(input_file.read)
+  output_file.write("==Copy end==\n")
+  input_file.close
+  output_file.close
+ensure
+	# 処理が終了したらそのことを出力して終了
+  puts 'finish.'
+end
+```
+
+これでエラーを発生させずに実行は終了するが、ファイルオープンに失敗した時にディレクトリを作成するだけで終了してしまう。ディレクトリを作成した後にbeginの処理を再度実行したい時には、rescue内にretryを書くと良い。
+
+```ruby
+begin
+  input_file = open('text/input.txt', 'w+')
+  output_file = open('text/output.txt', 'w')
+rescue
+  Dir::mkdir('text')
+  retry  # retryを追加
+else
+  output_file.write("==Copy start==\n")
+  output_file.write(input_file.read)
+  output_file.write("==Copy end==\n")
+  input_file.close
+  output_file.close
+ensure
+  puts 'finish.'
+end
+```
