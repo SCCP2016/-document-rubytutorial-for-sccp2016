@@ -5,12 +5,16 @@
 ```ruby
 begin
   # 例外が発生しうる処理
+
 rescue
   # 例外が発生した場合の処理
+
 else
   # 例外が発生しなかった場合の処理
+
 ensure
   # 例外が発生したかどうかに関わらず実行される処理
+
 end
 ```
 
@@ -21,9 +25,11 @@ begin
   # ファイルをオープン
   input_file = open('text/input.txt', 'w+')
   output_file = open('text/output.txt', 'w')
+
 rescue
   # ファイルオープンに失敗したらディレクトリを作成
   Dir::mkdir('text')
+
 else
   # ファイルオープンに成功したらコピーしてファイルクローズ
   output_file.write("==Copy start==\n")
@@ -31,9 +37,11 @@ else
   output_file.write("==Copy end==\n")
   input_file.close
   output_file.close
+
 ensure
 	# 処理が終了したらそのことを出力して終了
   puts 'finish.'
+
 end
 ```
 
@@ -43,17 +51,21 @@ end
 begin
   input_file = open('text/input.txt', 'w+')
   output_file = open('text/output.txt', 'w')
+
 rescue
   Dir::mkdir('text')
   retry  # retryを追加
+
 else
   output_file.write("==Copy start==\n")
   output_file.write(input_file.read)
   output_file.write("==Copy end==\n")
   input_file.close
   output_file.close
+
 ensure
   puts 'finish.'
+
 end
 ```
 
