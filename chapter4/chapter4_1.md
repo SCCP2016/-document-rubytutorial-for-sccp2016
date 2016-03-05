@@ -56,3 +56,5 @@ ensure
   puts 'finish.'
 end
 ```
+
+また、補足だがbegin...endも式である。その値は式内で最後に評価された式の値になる。
