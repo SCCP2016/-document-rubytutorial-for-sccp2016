@@ -1,75 +1,56 @@
-### 6.3 クラス変数とクラスメソッド
+### 6.4 継承
 
-前節でオブジェクトは固有の状態「フィールド」を持っていることを説明した。
-クラス全体で共有の状態を扱いたい場合は。*クラス変数*を使用する。
-以下がクラス変数の例である。
+前節ではRubyでオブジェクト指向をする上で重要なクラスの概念について学んだ。
+早速これを利用して、プログラマのクラスを定義すると以下のようになるだろう。
 
 ```ruby
-class Human
-  @@population = 0
-
-  def initialize(name, age)
+class Programmer
+  def initialize(name, age, languages)
     @name = name
     @age = age
-    @@population += 1
+    @languages = languages
   end
 
   def to_s
-    "#{@name}(#{@age})"
-  end
-
-  def total_population
-    @@population
+    "#{@name} (#{@age})\n" + @languages.join(',')
   end
 end
 
-john = Human.new('John', 15)
-mike = Human.new('Mike', 18)
-john.total_population
-=> 2
-mike.total_population
-=> 2
+Programmer.new('Mike', '18', ['C++', 'Ruby', 'PHP', 'Java'])
+=> "Mike (18)\nC++,Ruby,PHP,Java"
+
 ```
 
-クラス変数は@@(アットマークアットマーク)を変数名の先頭に付けることで宣言できる。
-クラスはメソッドの集合ではなく、式の集合であることを覚えているだろうか。
-そのためメソッドの外でクラス変数の初期化を行うことができる。
-この初期化が行われるのは、クラスの定義がされたときの一度きりである。
-あとはフィールド同様どのメソッド(同一クラス内の式)で呼び出し可能である。
-オブジェクト共有の状態であるフィールド(インスタンスフィールド)と異なる点は、クラス共有の状態として使えるため、上の例では*john*も*mike*も同じ値を返す。つまりこの世界では世界人口(@@count)を人間は常識として知っている。人間の常識として世界人口があるため、世界人口を知るためには人間を介する必要はなくなる。その場合にはクラスメソッドを利用する。
+プログラマは習得言語を文字列の配列で持ち、*to_s*メソッドで表示する。
+しかし、プログラマは人間でもあるため、大半が人間の機能と重複している。
+このときプログラマの差分のみを実装するには継承という仕組みを使う。
 
 ```ruby
-# 上のコードから一部抜粋・修正
+class Programmer < Human
+  def initialize(name, age, languages)
+    super(name, age)
+    @languages = languages
+  end
 
-def self.total_population # または def Human.total_population でも可
-  @@population
+  def to_s
+    super.to_s + "\n" + @languages.join(',')
+  end
 end
-
-...
-
-Human.total_population
-=> 2
 ```
 
-以上のように、*self.* をメソッド名の先頭に付けることで、インスタンスメソッドをクラスメソッドに
-変換することができる。これで晴れて世界人口は世界の常識となった。逆にインスタンスからクラスメソッドを呼び出すことができなくなったので注意しよう。
+上の例では*Programmer*クラスが*Human*クラスを継承している。
+このときの*Programmer*クラスを「サブクラス(子クラス)」、*Human*クラスを「スーパークラス(親クラス)」と呼ぶ。サブクラスはスーパークラスの機能(メソッド、フィールド)にアクセスすることができる。
+プログラマのコンストラクタではスーパークラスのコンストラクタである「スーパーコンストラクタ」
+を呼び出している(*super(name,age)*)。
+*to_s*メソッドでは、スーパークラスの*to_s*メソッドを呼び出し、Humanクラスの文字列を結合して、
+新たな文字列を生成している。これにより大幅な実装重複が削除ができた。
+このとき、スーパークラスのメソッドを再定義することを「オーバーライド」と呼ぶ。上の例ではinitialize、to_sともにオーバーライドしていることになる。
+またプログラマクラスと人間クラスの関係をIS-Aの関係と呼ぶ(Programmer is a Human. ただし逆は成り立たない)。
 
 演習:
 
-クラス変数とクラスメソッドを利用して、familyName単位での人の数を出力出来るようにせよ。
+継承関係を持ったクラスをいくつか考え、実装せよ。
+余裕があれば以下のJavaの演習の継承をRubyで再実装せよ。
 
-```ruby
-Human.new('Willard', 'Smith', 47)
-Human.new('Shelley', 'Smith', 43)
-Human.new('Frank', 'Williams', 63)
-Human.new('Scott', 'Brown', 32)
-Human.new('Jane', 'Brown', 25)
-Human.new('Bobby', 'Brown', 22)
-
-Human.family_population('Smith')
-=> 2
-Human.family_population('Williams')
-=> 1
-Human.family_population('Brown')
-=> 3
-```
+- http://web-int.u-aizu.ac.jp/~yutaka/courses/javaone/ex_04.html
+- http://web-int.u-aizu.ac.jp/~yutaka/courses/javaone/ex_05.html
