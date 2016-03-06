@@ -27,5 +27,8 @@
 * [第7章](chapter7/README.md)
 	* [モジュールの定義と使い方](chapter7/chapter7_1.md)
 	* [名前空間](chapter7/chapter7_2.md)
+* [第8章](chapter8/README.md)
+  * [Gemの概要と使い方](chapter8/chapter8_1.md)
+  * [Bundlerの概要と使い方](chapter8/chapter8_2.md)
 * [終わりに](postscript.md)
 * [参考資料](bibliography.md)
