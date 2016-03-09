@@ -4,3 +4,4 @@ Rubyでプログラムを書く時によく使うツールにGemとBundlerがあ
 
 8.1 RubyGemsの概要と使い方  
 8.2 Bundlerの概要と使い方  
+8.3 Bundlerからツールを使う  

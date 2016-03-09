@@ -31,5 +31,6 @@
 * [第8章](chapter8/README.md)
   * [RubyGemsの概要と使い方](chapter8/chapter8_1.md)
   * [Bundlerの概要と使い方](chapter8/chapter8_2.md)
+  * [Bundlerからツールを使う](chapter8/chapter8_3.md)
 * [終わりに](postscript.md)
 * [参考資料](bibliography.md)
