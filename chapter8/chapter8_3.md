@@ -34,4 +34,4 @@ service.rb -- 1 warning:
   [4]:NestedIterators: call_service contains iterators nested 3 deep [https://github.com/troessner/reek/blob/master/docs/Nested-Iterators.md]
 ```
 
-今度はプロジェクトにインストールしたreekを実行できた。
+今度はプロジェクトにインストールしたreekを実行できた。プロジェクトにインストールしたgemのツールを使う時にはこのようにして実行する。
