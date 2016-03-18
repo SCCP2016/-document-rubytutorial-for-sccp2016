@@ -46,13 +46,13 @@ p hash       #=> {:one=>1, :two=>2, :three=>3, :five=>5}
 
 ```ruby
 # キーを指定して、値を参照する
-p humane_studies["Philosophy"]  # => "Aoki"
+p humane_studies[:Philosophy]  # => "Aoki"
 # 存在しないキーの場合
-p humane_studies["Linear Algebra"] #=> nil
+p humane_studies[:Linear Algebra] #=> nil
 # 既存のキーの更新
-p humane_studies["Philosophy"] = ["Ohta", "Aoki"]
+p humane_studies[:Philosophy] = ["Ohta", "Aoki"]
 # 新しいキーの登録
-book_to_author["Written expression"] = "Sawa"
+book_to_author[:Written_expression] = "Sawa"
 ```
 
 ハッシュも多くのメソッドを備えているが、とりあえずは配列の要領でリファレンスを見てもらうことにする。
