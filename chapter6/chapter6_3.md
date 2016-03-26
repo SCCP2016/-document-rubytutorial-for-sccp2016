@@ -58,6 +58,20 @@ class Human
   end
   # ここまで追加
 end
+
+jhon = Human.new('Jhon', 18)
+
+p jhon.get_name
+#=> "Jhon"
+
+p jhon.set_name('Pole')
+#=> "Pole"
+
+p jhon.get_age
+#=> 18
+
+p jhon.get_name(19)
+#=> 19
 ```
 
 見て分かるように、各変数ごとに代入・参照メソッドを用意すると冗長なコードが並んだようなクラスになってしまう。この冗長なコードはアクセサメソッドを使って自動生成することで解決できる。
