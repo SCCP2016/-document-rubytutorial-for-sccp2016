@@ -100,16 +100,12 @@ end
 ```ruby
 require 'sinatra'
 
-class MainApp < Sinatra::Base
-
-  get '/' do
+get '/' do
     'get'
-  end
+end
   
-  post '/' do
+post '/' do
     'post'
-  end
-  
 end
 ```
 
