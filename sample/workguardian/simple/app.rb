@@ -15,6 +15,8 @@ class WorkSpace
       JSON.load(json)
     rescue
       raise 'Configuration file loading has failured.'
+    ensure
+      json.close
     end
   end
 
@@ -142,6 +144,8 @@ class InitCommand < Command
     default = open(__dir__ + '/default.json', 'r')
     work_conf = open(work_root + '/workguardian.json', 'w+')
     work_conf.write(default.read)
+    default.close
+    work_conf.close
   end
 
   def help
