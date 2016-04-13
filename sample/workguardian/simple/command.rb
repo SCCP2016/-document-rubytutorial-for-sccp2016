@@ -1,5 +1,5 @@
 # require_relativeについてはapp.rbのコメントを参照
-require_relative './workspace'
+require_relative 'workspace'
 
 # 全てのコマンドの親クラス(スーパークラス)
 class Command
@@ -74,7 +74,6 @@ class InitCommand < Command
   # デフォルトの設定ファイルをwork_rootに設置する
   # work_root: 設定ファイルを設置するディレクトリ
   def copy_conf_file(work_root)
-    # __dir__ return a string of directory on this ruby file.
     default = open(__dir__ + '/default.json', 'r')
     work_conf = open(work_root + '/workguardian.json', 'w+')
     work_conf.write(default.read)
