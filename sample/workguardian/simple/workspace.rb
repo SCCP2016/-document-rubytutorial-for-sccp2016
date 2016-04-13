@@ -45,8 +45,6 @@ class WorkSpace
   # 演習名の配列を返す
   # return: 演習名の配列
   def exercise_names
-    # mapメソッドは配列全てにブロックを適用して、ブロックの戻り値を改めて配列に格納する。
-    # [1, 2, 3].map{|num| num.to_s} #=> ["1", "2", "3"]
     exercises.map{|exe| exe['name']}
   end
 
@@ -97,10 +95,12 @@ class WorkSpace
 end
 
 # 演習内の課題の提出状況についてのクラス
+# @name: 演習名
+# @exe_root: 演習のルートディレクトリ(演習名のディレクトリ)
 class Exercise
 
-  # @name: 演習名
-  # @exe_root: 演習のルートディレクトリ(演習名のディレクトリ)
+  # name: 演習名
+  # work_root: ワークスペースのルートディレクトリ
   # assignments: 課題名の配列
   def initialize(name, work_root, assignments)
     @name = name
