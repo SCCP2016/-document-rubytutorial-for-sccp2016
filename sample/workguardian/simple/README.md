@@ -99,7 +99,7 @@ arrayの全ての要素に対して、Bool値を返すblockを適用して、tru
 #=> [2, 4]
 ```
 
-**array.all?(&block)**
+**array.any?(&block)**
 arrayの全ての要素に対してblockを適用し、一つ以上trueが返ってきたらtrue、全てfalseならfalseを返す。
 
 ```ruby
