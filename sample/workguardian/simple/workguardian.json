@@ -1,9 +1,0 @@
-{
-  "name": "default-work",
-  "exercises":[
-    {
-      "name": "ex01",
-      "assignments": ["ex01_a.c", "ex01_b.c"]
-    }
-  ]
-}
