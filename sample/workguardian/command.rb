@@ -1,16 +1,21 @@
+# require_relativeについてはapp.rbのコメントを参照
 require_relative 'abstract_method'
 require_relative 'workspace'
 
 include AbstractMethod
 
+# 全てのコマンドの親クラス(スーパークラス)
 class Command
+  # run, help, args_num, name, default_argsメソッドを定義
   absdef :run, :help, :args_num
   absdef_singleton :name, :default_args
 
+  # 不正な引数の場合に例外を投げる
   def raise_if_errored_args(args)
     raise "Required #{args_num} args, but #{args.size}." if !args?(args)
   end
 
+  # 正常な引数かどうかを判定する
   def args?(args)
     args.size >= args_num
   end
@@ -128,21 +133,21 @@ class CheckCommand < Command
     puts e.message
   end
 
-  def finish_until(cond, message)
+  def finish_unless(cond, message)
    raise message unless cond
   end
 
   def look_configure_file(work_root)
-    finish_until(WorkSpace.configuration_file?(work_root),"Configuration file has not found.")
+    finish_unless(WorkSpace.configuration_file?(work_root),"Configuration file has not found.")
   end
 
   def look_directory_structure(workspace)
-    finish_until(workspace.directory_structure?, "This workspace has not created directory structure.")
+    finish_unless(workspace.directory_structure?, "This workspace has not created directory structure.")
   end
 
   def look_unassigned_works(workspace, number)
     unassined_works = workspace.find_unassigned_works_in(number)
-    finish_until(unassined_works.size == 0, "#{unassined_works.join(', ')} is not assigned.")
+    finish_unless(unassined_works.size == 0, "#{unassined_works.join(', ')} is not assigned.")
   end
 
   def help
@@ -164,17 +169,26 @@ class CheckCommand < Command
   end
 end
 
+# コマンドの判定やオプションハッシュの作成をするクラス
 module CommandManager
+
+  # コマンドの配列
   def self.commands
     [InitCommand, CreateCommand, CheckCommand, UndefinedCommand]
   end
 
+  # 名前からコマンドを生成する
+  # return: コマンドクラス
   def self.generate_command(name)
     command = CommandManager::commands.find{|cmd|  cmd.name == name}
     command = UndefinedCommand unless command
     [command.new, command.default_args]
   end
 
+  # コマンドライン引数の配列からオプションのハッシュを生成する
+  # ["-a", "b", "-c", "d"] => {"-a" => "b", "-c" => "d"}
+  # args: コマンド名を除いたコマンドライン引数
+  # return: 生成したオプションハッシュ
   def self.generate_option_hash(cmd_args)
     def self.make_option_hash(option_hash, args)
       return option_hash if args.size <= 0
@@ -195,10 +209,16 @@ module CommandManager
     make_option_hash({}, cmd_args)
   end
 
+  # 値付きのオプション"-hoge"かどうかを判定する
+  # name: 判定する名前
+  # return: 判定結果
   def self.option_format?(name)
     name.size >= 2 && name[0] == '-' && name[1] != '-'
   end
 
+  # フラグオプション"--hoge"かどうかを判定する
+  # name: 判定する名前
+  # return: 判定結果
   def self.option_flag_format?(name)
     name.size >= 3 && name[0] == '-' && name[1] == '-'
   end

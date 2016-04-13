@@ -153,20 +153,20 @@ class CheckCommand < Command
   # condがfalseを返した場合に例外を返す
   # cond: 条件式
   # message: 例外に含めるメッセージ
-  def finish_until(cond, message)
+  def finish_unless(cond, message)
    raise message if !cond
   end
 
   # 設定ファイルがwork_rootに存在するかどうかを判定する
   # work_root: ワークスペースのルートディレクトリ
   def look_configure_file(work_root)
-    finish_until(WorkSpace.configuration_file?(work_root),"Configuration file has not found.")
+    finish_unless(WorkSpace.configuration_file?(work_root),"Configuration file has not found.")
   end
 
   # 設定ファイル通りに演習ディレクトリが作成されているかどうかを判定する
   # workspace: 判定したいワークスペースのWorkSpaceオブジェクト
   def look_directory_structure(workspace)
-    finish_until(workspace.directory_structure?, "This workspace has not created directory structure.")
+    finish_unless(workspace.directory_structure?, "This workspace has not created directory structure.")
   end
 
   # 未提出の課題があるかどうかを判定する
@@ -174,7 +174,7 @@ class CheckCommand < Command
   # number: 判定する演習の番号
   def look_unassigned_works(workspace, number)
     unassined_works = workspace.find_unassigned_works_in(number)
-    finish_until(unassined_works.size == 0, "#{unassined_works.join(', ')} is not assigned.")
+    finish_unless(unassined_works.size == 0, "#{unassined_works.join(', ')} is not assigned.")
   end
 
   def help

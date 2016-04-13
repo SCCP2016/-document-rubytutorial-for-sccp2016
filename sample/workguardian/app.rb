@@ -1,6 +1,14 @@
+# WorkGuardian
+# 各演習(課題)用のディレクトリを自動生成して、課題の作成を監視します。
+
+# require_relativeは実行ファイルのあるディレクトリ(この場合はapp.rbがあるディレクトリ)
+# からの相対パスで指定したライブラリを読み込むメソッド。
+# requireは実行した時のカレントディレクトリからの相対パスになってしまうので注意。
 require_relative 'command'
 
+# メイン関数を持つクラス
 class Main
+  # メイン関数(Rubyでは本当は不要)
   def self.main
     command, default_args = CommandManager::generate_command(ARGV[0])
     command_args = ARGV.drop(1)
@@ -14,4 +22,5 @@ class Main
   end
 end
 
+# メイン関数呼び出し
 Main.main
