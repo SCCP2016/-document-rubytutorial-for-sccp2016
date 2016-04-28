@@ -38,21 +38,10 @@ irb(main):018:0> "ruby".object_id == "ruby".object_id
 hash = {one: 1, two: 2, three: 3}
 p hash[:one] #=> 1
 p hash[:two] #=> 2
+p hash[:five] #=> nil
 hash[:five] = 5 # 新しいキーと値の組み合わせ。
+hash[:two] = ['II'] # 既存のキーの更新
 p hash       #=> {:one=>1, :two=>2, :three=>3, :five=>5}
-```
-
-上のハッシュをREPL上で宣言して、実際に以下のコマンドを打ってハッシュの挙動を確かめてみよう。
-
-```ruby
-# キーを指定して、値を参照する
-p humane_studies[:Philosophy]  # => "Aoki"
-# 存在しないキーの場合
-p humane_studies[:Linear Algebra] #=> nil
-# 既存のキーの更新
-p humane_studies[:Philosophy] = ["Ohta", "Aoki"]
-# 新しいキーの登録
-book_to_author[:Written_expression] = "Sawa"
 ```
 
 ハッシュも多くのメソッドを備えているが、とりあえずは配列の要領でリファレンスを見てもらうことにする。
