@@ -124,11 +124,11 @@ TrueClass、FalseClassには論理演算をするメソッドが定義されて�
 
 ```ruby
 # OR
-true | false
+true || false
 #=> true
 
 # AND
-true & false
+true && false
 #=> false
 
 # XOR
